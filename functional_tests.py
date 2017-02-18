@@ -28,5 +28,8 @@ class NewVisitorTest(unittest.TestCase):
 
         # 그녀는 바로 작업을 추가하기로 한다
 
+# 파이썬 스크립트가 다른 스크립트에 import된 것이 아니라,
+# 커맨드 라인을 통해서 실행됐다는 것을 확인하는 코드
 if __name__ == '__main__':
+    # unittest 테스트 실행자를 실행
     unittest.main(warnings='ignore')

@@ -22,4 +22,4 @@ class HomePageTest(TestCase):
         response = home_page(request)
         # 템플릿을 이용한 렌더링 테스트 : render_to_string 함수를 이용.
         expected_html = render_to_string('home.html')
-        self.assertTupleEqual(response.content.decode(), expected_html)
+        self.assertEqual(response.content.decode(), expected_html)

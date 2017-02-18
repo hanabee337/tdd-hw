@@ -31,7 +31,7 @@ class NewVisitorTest(unittest.TestCase):
 
             # 그녀는 바로 작업을 추가하기로 한다
             inputbox = self.browser.find_element_by_id('id_new_item')
-            self.assertTupleEqual(
+            self.assertEqual(
                 inputbox.get_attribute('placeholder'),
                 '작업 아이템 입력'
             )

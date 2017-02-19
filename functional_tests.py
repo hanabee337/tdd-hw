@@ -1,24 +1,16 @@
 import unittest
 
 from selenium import webdriver
-
-
-# browser = webdriver.Chrome()
-# browser.get('http://localhost:8000')
-# assert 'To-Do' in browser.title, "Browser title was " + browser.title
-# browser.quit()
 from selenium.webdriver.common.keys import Keys
 
 
 class NewVisitorTest(unittest.TestCase):
-
     def setUp(self):
         self.browser = webdriver.Chrome()
         self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
-
 
     def check_for_row_in_list_table(self, row_text):
         table = self.browser.find_element_by_id('id_list_table')
@@ -70,7 +62,7 @@ class NewVisitorTest(unittest.TestCase):
         # 이 때 URL에 대한 설명도 함께 제공된다
         self.fail('Finish the test~~~')
 
-        #만족하고 잠자리에 든다
+        # 만족하고 잠자리에 든다
 
 
 # 파이썬 스크립트가 다른 스크립트에 import된 것이 아니라,

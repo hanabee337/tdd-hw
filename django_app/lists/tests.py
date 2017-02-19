@@ -1,11 +1,12 @@
 from django.core.urlresolvers import resolve
+from django.http import HttpRequest
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.test import TestCase
 
+from lists.models import Item
 from lists.views import home_page
 
-from lists.models import Item
 
 # Create your tests here.
 # class SmokeTest(TestCase):
@@ -19,18 +20,22 @@ class HomePageTest(TestCase):
         self.assertEqual(found.func, home_page)
 
     def test_home_page_returns_correct_html(self):
-        request = HttpResponse()
+        request = HttpRequest()
         response = home_page(request)
         # 템플릿을 이용한 렌더링 테스트 : render_to_string 함수를 이용.
         expected_html = render_to_string('home.html')
         self.assertEqual(response.content.decode(), expected_html)
 
-    def test_home_page_ca_save_a_POST_request(self):
-        request = HttpResponse()
+    def test_home_page_can_save_a_POST_request(self):
+        request = HttpRequest()
         request.method = 'POST'
         request.POST['item_text'] = '신규 작업 아이템'
 
         response = home_page(request)
+
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, '신규 작업 아이템')
 
         self.assertIn('신규 작업 아이템', response.content.decode())
         expected_html = render_to_string(

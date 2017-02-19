@@ -1,6 +1,5 @@
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
-from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.test import TestCase
 
@@ -43,6 +42,11 @@ class HomePageTest(TestCase):
             {'new_item_text': '신규 작업 아이템'}
         )
         self.assertEqual(response.content.decode(), expected_html)
+
+    def test_home_page_only_saves_items_when_necessary(self):
+        request = HttpRequest()
+        home_page(request)
+        self.assertEqual(Item.objects.count(), 0)
 
 
 class ItemModelTest(TestCase):
